@@ -30,4 +30,4 @@ class Libro:
         self.estado = estado
 
     def __str__(self):
-        return f"Libro [ID: {self.codigo}, Título: {self.titulo}]"
+        return f"Libro [Codigo: {self.codigo}, Título: {self.titulo}]"
