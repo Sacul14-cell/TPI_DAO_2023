@@ -1,5 +1,8 @@
+from Biblioteca18.Clase.estado import Estado
+
+
 class Libro:
-    def __init__(self, codigo, titulo, precio_reposicion, estado):
+    def __init__(self, codigo, titulo, precio_reposicion, estado:Estado):
         self.codigo = codigo
         self.titulo = titulo
         self.precio_reposicion = precio_reposicion
