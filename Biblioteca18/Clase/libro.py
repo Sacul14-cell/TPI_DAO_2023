@@ -31,3 +31,12 @@ class Libro:
 
     def __str__(self):
         return f"Libro [Codigo: {self.codigo}, Título: {self.titulo}]"
+    
+    def estaPrestado(self):
+        return self.estado.es_prestado()
+
+    def estaDisponible(self):
+        return self.estado.es_disponible()
+
+    def estaExtraviado(self):
+        return self.estado.es_extraviado()
