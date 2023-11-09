@@ -33,10 +33,10 @@ class Libro:
         return f"Libro [Codigo: {self.codigo}, Título: {self.titulo}]"
     
     def estaPrestado(self):
-        return self.estado.es_prestado()
+        return self.estado.esPrestado()
 
     def estaDisponible(self):
-        return self.estado.es_disponible()
+        return self.estado.esDisponible()
 
     def estaExtraviado(self):
-        return self.estado.es_extraviado()
+        return self.estado.esExtraviado()

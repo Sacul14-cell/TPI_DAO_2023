@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 
 class Estado(ABC):
     @abstractmethod
-    def es_extraviado(self):
+    def esExtraviado(self):
         pass
 
     @abstractmethod
