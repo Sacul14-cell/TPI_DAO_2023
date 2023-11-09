@@ -8,7 +8,7 @@ class Prestamo:
         self.socio = socio
 
     def devolverLibro(self):
-        self.fecha_devolucion = obtener_fecha_actual()
+        self.fecha_devolucion = obtenerFechaActual()
         if self.fecha_devolucion > self.fecha_prestamo:
             demora = self.calcular_demora()
             if demora > 0:
