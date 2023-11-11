@@ -2,6 +2,7 @@ from tkinter import *
 from VentanaLibros.ListadoLibros import ListadoLibros
 from VentanaPrestamos.ListadoPrestamos import ListadoPrestamos
 from VentanaSocios.ListadoSocios import ListadoSocios
+from VentanaReportes import VentanaReportes
 class VentanaPrincipal:
     def __init__(self):
         self.window = Tk()
@@ -13,7 +14,7 @@ class VentanaPrincipal:
         frame2.pack(pady=10, padx=10)
         
 
-        Button(frame1, text="Administrar Libros", command=self.ListarSocios).pack(padx=10, pady=10)
+        Button(frame1, text="Administrar Libros", command=self.ListarLibros).pack(padx=10, pady=10)
         Button(frame1, text="Administrar Socios", command=self.ListarSocios).pack(padx=10, pady=10)
         Button(frame1, text="Administrar Prestamos/Devoluciones", command=self.ListarPrestamos).pack(padx=10, pady=10)
 
@@ -25,7 +26,7 @@ class VentanaPrincipal:
         self.window.mainloop()
     
     def reportes(self):
-        pass
+        VentanaReportes().mostrar()
     def ListarLibros(self):
         ListadoLibros().mostrar()
     def ListarSocios(self):

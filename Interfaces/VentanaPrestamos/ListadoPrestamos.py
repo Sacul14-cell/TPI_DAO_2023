@@ -20,7 +20,8 @@ class ListadoPrestamos:
         codigo_libro = 3252
         fecha_prestamo = "23/04/2023"
         dias_pactados = 1
-        self.lista_Prestamos.insert("", "end", values=(dni_socio, codigo_libro, fecha_prestamo, dias_pactados))
+        fecha_devolucion = ""
+        self.lista_Prestamos.insert("", "end", values=(dni_socio, codigo_libro, fecha_prestamo, dias_pactados, fecha_devolucion))
 
     def __init__(self):
         # Crear la self.ventana principal
@@ -37,18 +38,20 @@ class ListadoPrestamos:
         eliminar_button.grid(row=3, column=2)
 
         # Crear lista de Prestamos
-        self.lista_Prestamos = ttk.Treeview(self.ventana, columns=("Dni del socio", "Codigo del libro", "Fecha Prestamo", "Dias Pactados"), show="headings")
+        self.lista_Prestamos = ttk.Treeview(self.ventana, columns=("Dni del socio", "Codigo del libro", "Fecha Prestamo", "Dias Pactados", "Fecha de Devolución"), show="headings")
         self.lista_Prestamos.heading("#1", text="Dni del socio")
         self.lista_Prestamos.heading("#2", text="Codigo del libro")
         self.lista_Prestamos.heading("#3", text="Fecha Prestamo")
         self.lista_Prestamos.heading("#4", text="Dias Pactados")
+        self.lista_Prestamos.heading("#5", text="Fecha de Devolución")
         self.lista_Prestamos.grid(row=4, column=0, columnspan=3)
 
         dni_socio = 323
         codigo_libro = 3252
         fecha_prestamo = "23/04/2023"
         dias_pactados = 1
-        self.lista_Prestamos.insert("", "end", values=(dni_socio, codigo_libro, fecha_prestamo, dias_pactados))
+        fecha_devolucion = "27/04/2023"
+        self.lista_Prestamos.insert("", "end", values=(dni_socio, codigo_libro, fecha_prestamo, dias_pactados, fecha_devolucion))
 
         # Configurar evento para cargar datos al hacer clic en un elemento de la lista
         self.lista_Prestamos.bind("<<TreeviewSelect>>", lambda event: self.cargar_datos())

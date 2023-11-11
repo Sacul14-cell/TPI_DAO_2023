@@ -17,6 +17,7 @@ class AgregarPrestamo:
         self.codigo = StringVar()
         self.fechaPrestamo = StringVar()
         self.diasPactados = StringVar()
+        self.fechaDevolucion = StringVar()
 
         Label(frame1, text="Dni del Socio:").grid(row=0, column=0)
         Entry(frame1, textvariable=self.dni).grid(row=0, column=1)
@@ -30,6 +31,9 @@ class AgregarPrestamo:
         if self.datos == []:
             Button(frame2, text="Agregar", command=self.agregar_Prestamo).pack(side="left", padx=10)
         else:
+            Label(frame1, text="Fecha de Devolución:").grid(row=4, column=0)
+            Entry(frame1, textvariable=self.fechaDevolucion).grid(row=4, column=1)
+
             Button(frame2, text="Editar", command=self.editar_Prestamo).pack(side="left", padx=10)
         
         Button(frame2, text="Cancelar", command=self.window.destroy).pack(side="right", padx=10)
@@ -42,13 +46,15 @@ class AgregarPrestamo:
     def agregar_Prestamo(self):
         dni = self.dni.get()
         codigo = self.codigo.get()
-        fechaPrestamo = self.fechaPrestamo.get("")
-        diasPactados = self.diasPactados.get("")
-        # self.lista_Prestamos.insert("", "end", values=(dni, codigo, fechaPrestamo, diasPactados))
-        dni = self.dni.set("")
-        codigo = self.codigo.set("")
-        fechaPrestamo = self.fechaPrestamo.set("")
-        diasPactados = self.diasPactados.set("")
+        fechaPrestamo = self.fechaPrestamo.get()
+        diasPactados = self.diasPactados.get()
+        fechaDevolucion = self.fechaDevolucion.get()
+        # self.lista_Prestamos.insert("", "end", values=(dni, codigo, fechaPrestamo, diasPactados, fechaDevolucion))
+        self.dni.set("")
+        self.codigo.set("")
+        self.fechaPrestamo.set("")
+        self.diasPactados.set("")
+        self.fechaDevolucion.set("")
 
 
     # Función para editar un Prestamo seleccionado
@@ -58,8 +64,9 @@ class AgregarPrestamo:
         codigo = self.datos[1]
         fechaPrestamo = self.datos[2]
         diasPactados = self.datos[3]
-        # self.lista_Prestamos.insert("", "end", values=(dni, codigo, fechaPrestamo, diasPactados))
-        dni = self.dni.set("")
-        codigo = self.codigo.set("")
-        fechaPrestamo = self.fechaPrestamo.set("")
-        diasPactados = self.diasPactados.set("")
+        # self.lista_Prestamos.insert("", "end", values=(dni, codigo, fechaPrestamo, diasPactados, fechaDevolucion))
+        self.dni.set("")
+        self.codigo.set("")
+        self.fechaPrestamo.set("")
+        self.diasPactados.set("")
+        self.fechaDevolucion.set("")

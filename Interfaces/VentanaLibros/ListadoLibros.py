@@ -44,6 +44,8 @@ class ListadoLibros:
         self.lista_libros.heading("#4", text="Estado")
         self.lista_libros.grid(row=4, column=0, columnspan=3)
 
+        
+        self.lista_libros.insert("", "end", values=(13, "It", 344, "Disponible"))
         # Configurar evento para cargar datos al hacer clic en un elemento de la lista
         self.lista_libros.bind("<<TreeviewSelect>>", lambda event: self.cargar_datos())
 
