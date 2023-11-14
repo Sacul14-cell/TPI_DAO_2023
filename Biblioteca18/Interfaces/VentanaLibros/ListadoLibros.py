@@ -16,11 +16,12 @@ class ListadoLibros:
     def cargar_datos(self):
         selected_item = self.lista_libros.selection()[0]
         libro = self.lista_libros.item(selected_item, "values")
+        id = 2
         codigo = 323
         titulo = "sdhsdhs"
         precio = 435
-        estado = "1"
-        self.lista_libros.insert("", "end", values=(codigo, titulo, precio, estado))
+        estado = "Extraviado"
+        self.lista_libros.insert("", "end", text=id,values=(codigo, titulo, precio, estado))
 
     def __init__(self):
         # Crear la self.ventana principal
@@ -44,8 +45,15 @@ class ListadoLibros:
         self.lista_libros.heading("#4", text="Estado")
         self.lista_libros.grid(row=4, column=0, columnspan=3)
 
+        
+        self.lista_libros.insert("", "end", text=1,values=(13, "It", 344, "Disponible"))
         # Configurar evento para cargar datos al hacer clic en un elemento de la lista
         self.lista_libros.bind("<<TreeviewSelect>>", lambda event: self.cargar_datos())
 
+        self.lista_libros.bind("<ButtonRelease-1>", lambda event: self.obtener_id_seleccionado())
     def mostrar(self):
         self.ventana.mainloop()
+    def obtener_id_seleccionado(self):
+        item_seleccionado = self.lista_libros.focus()  # Obtiene el elemento seleccionado
+        id_seleccionado = self.lista_libros.item(item_seleccionado, "text")  # Obtiene el valor del ID (supongamos que el ID está en la columna "text")
+        print("ID seleccionado:", id_seleccionado)

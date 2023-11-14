@@ -1,5 +1,4 @@
 import sqlite3
-
 class DBConnection:
     _instance = None
     dbconnection = None
@@ -8,12 +7,5 @@ class DBConnection:
         if not cls._instance:
             cls._instance = super(DBConnection, cls).__new__(cls)
             cls.dbconnection = connection_string
+            cls._instance.conn = sqlite3.connect(connection_string)
         return cls._instance
-    
-    def execute(self, query):
-        cursor = self.conn.cursor()
-        cursor.execute(query)
-        result = cursor.fetchall()
-        cursor.close()
-        return result
-

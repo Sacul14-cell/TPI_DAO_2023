@@ -25,11 +25,14 @@ class AgregarLibro:
         Label(frame1, text="Precio:").grid(row=2, column=0)
         Entry(frame1, textvariable=self.precio).grid(row=2, column=1)
         Label(frame1, text="Estado:").grid(row=3, column=0)
-        Entry(frame1, textvariable=self.estado).grid(row=3, column=1)
-
+        #Entry(frame1, textvariable=self.estado).grid(row=3, column=1)
+        ttk.Combobox(frame1, width=17, height=5,state="readonly",textvariable=self.estado, values=["Disponible", "Prestado", "Extraviado"]).grid(row=3, column=1)
+ 
         if self.datos == []:
             Button(frame2, text="Agregar", command=self.agregar_libro).pack(side="left", padx=10)
         else:
+            print(self.datos)
+
             Button(frame2, text="Editar", command=self.editar_libro).pack(side="left", padx=10)
         
         Button(frame2, text="Cancelar", command=self.window.destroy).pack(side="right", padx=10)
@@ -45,10 +48,10 @@ class AgregarLibro:
         precio = self.precio.get()
         estado = self.estado.get()
         # self.lista_libros.insert("", "end", values=(codigo, titulo, precio, estado))
-        codigo = self.codigo.set("")
-        titulo = self.titulo.set("")
-        precio = self.precio.set("")
-        estado = self.estado.set("")
+        self.codigo.set("")
+        self.titulo.set("")
+        self.precio.set("")
+        self.estado.set("")
 
 
     # Función para editar un libro seleccionado
@@ -59,7 +62,7 @@ class AgregarLibro:
         precio = self.datos[2]
         estado = self.datos[3]
         # self.lista_libros.item(selected_item, values=(codigo, titulo, precio, estado))
-        codigo = self.codigo.set("")
-        titulo = self.titulo.set("")
-        precio = self.precio.set("")
-        estado = self.estado.set("")
+        self.codigo.set("")
+        self.titulo.set("")
+        self.precio.set("")
+        self.estado.set("")
