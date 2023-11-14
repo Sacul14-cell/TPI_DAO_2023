@@ -1,4 +1,4 @@
-from Biblioteca18.Clase.estado import Estado
+from Estados.estado import Estado
 
 
 class Disponible(Estado):
@@ -16,3 +16,5 @@ class Disponible(Estado):
 
     def getDescripcion(self):
         return "El libro está disponible para ser prestado."
+    def __str__(self):
+        return self.getNombre()

@@ -1,4 +1,4 @@
-from Biblioteca18.Clase.estado import Estado
+from Estados.estado import Estado
 
 
 class Prestado(Estado):

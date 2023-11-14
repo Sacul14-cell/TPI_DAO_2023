@@ -22,11 +22,11 @@ class ListadoLibros:
         estado = "1"
         self.lista_libros.insert("", "end", values=(codigo, titulo, precio, estado))
 
-    def __init__(self):
+    def __init__(self, padron):
         # Crear la self.ventana principal
         self.ventana = tk.Tk()
         self.ventana.title("Gestión de Libros")
-
+        self.padron = padron
         
         # Crear botones para CRUD
         agregar_button = tk.Button(self.ventana, text="Agregar", command=self.agregar_libro)
@@ -44,6 +44,8 @@ class ListadoLibros:
         self.lista_libros.heading("#4", text="Estado")
         self.lista_libros.grid(row=4, column=0, columnspan=3)
 
+        for libro in self.padron:
+            self.lista_libros.insert("", "end", values=(libro.codigo, libro.titulo, libro.precio_reposicion, libro.estado))
         # Configurar evento para cargar datos al hacer clic en un elemento de la lista
         self.lista_libros.bind("<<TreeviewSelect>>", lambda event: self.cargar_datos())
 

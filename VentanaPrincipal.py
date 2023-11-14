@@ -4,10 +4,10 @@ from VentanaPrestamos.ListadoPrestamos import ListadoPrestamos
 from VentanaSocios.ListadoSocios import ListadoSocios
 from VentanaReportes import VentanaReportes
 class VentanaPrincipal:
-    def __init__(self):
+    def __init__(self, padron):
         self.window = Tk()
         self.window.title("TPI-DAO")
-        
+        self.padron = padron
         frame1 = Frame()
         frame1.pack(pady=20, padx=20)
         frame2 = Frame()
@@ -26,10 +26,10 @@ class VentanaPrincipal:
         self.window.mainloop()
     
     def reportes(self):
-        VentanaReportes().mostrar()
+        VentanaReportes(self.padron).mostrar()
     def ListarLibros(self):
-        ListadoLibros().mostrar()
+        ListadoLibros(self.padron.libros).mostrar()
     def ListarSocios(self):
-        ListadoSocios().mostrar()
+        ListadoSocios(self.padron.socios).mostrar()
     def ListarPrestamos(self):
-        ListadoPrestamos().mostrar()
+        ListadoPrestamos(self.padron.prestamos).mostrar()

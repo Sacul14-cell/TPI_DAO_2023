@@ -1,2 +1,4 @@
+from Entidades.biblioteca import Biblioteca
 from VentanaPrincipal import VentanaPrincipal
-VentanaPrincipal().mostrar()
+padron = Biblioteca()
+VentanaPrincipal(padron).mostrar()
