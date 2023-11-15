@@ -1,6 +1,14 @@
 
 from tkinter import *
 from tkinter import messagebox
+from reportlab.lib.pagesizes import letter
+from reportlab.lib import colors
+from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
+from reportlab.platypus.tables import Table, TableStyle
+from reportlab.lib.styles import getSampleStyleSheet
+from reportlab.lib.units import inch
+from Biblioteca18.Entidades.iteradores.iteradorCantidadLibrosEstado import IteradorCantidadLibrosEstados
+from Biblioteca18.Entidades.iteradores.iteradorCantidadLibrosEstado import IteradorSumatoriaLibrosExtraviados
 class VentanaReportes:
     def __init__(self, padron):
         self.window = Tk()
@@ -23,8 +31,26 @@ class VentanaReportes:
         
         
     def reporte1(self):
-        #messagebox.showinfo(title="Reporte", message=)
-        pass
+        doc = SimpleDocTemplate("ReporteCantidadLibros.pdf", pagesize=letter)
+        elementos=[]
+        styles = getSampleStyleSheet()
+        titulo="Estado de libros en la biblioteca"
+        elements.append(Paragraph(titulo, styles['Title']))
+        espacio = ""
+        elements.append(Paragraph(espacio, styles['Normal']))
+        iterador=IteradorCantidadLibrosEstados(self.padro.getLibros())
+        contEstados= iterador.contarLibros()
+        datos=[["Disponibles", "Prestados", "Extraviados"],[contEstados[0],contEstados[1],contEstados[2]]]
+        table = Table(data, colWidths=[1 * inch, 1 * inch, 1 * inch])
+        table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
+                                ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
+                                ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
+                                ('FONTNAME', (0, 0), (-1, 0), 'Helvetica-Bold'),
+                                ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
+                                ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
+                                ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
+        elementos.append(table)
+        doc.build(elements)
     def reporte2(self):
         #messagebox.showinfo(title="Reporte", message=)
         pass
