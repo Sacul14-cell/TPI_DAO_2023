@@ -43,4 +43,13 @@ class Biblioteca:
     
     def agregarPrestamo(self, prestamo):
         self.prestamos.add(prestamo)
+
+    def getLibros(self):
+        return self.libros
+    
+    def getSocios(self):
+        return self.socios
+    
+    def getPrestamos(self):
+        return self.prestamos
     
