@@ -52,8 +52,18 @@ class VentanaReportes:
         elementos.append(table)
         doc.build(elements)
     def reporte2(self):
-        #messagebox.showinfo(title="Reporte", message=)
-        pass
+        doc = SimpleDocTemplate("ReporteSumatoriaLibrosExtraviados.pdf", pagesize=letter)
+        elementos=[]
+        styles = getSampleStyleSheet()
+        titulo="Libros extraviados: monto para reposición"
+        elements.append(Paragraph(titulo, styles['Title']))
+        espacio = ""
+        elements.append(Paragraph(espacio, styles['Normal']))
+        iterador=IteradorSumatoriaLibrosExtraviados(self.padro.getLibros())
+        datos=iterador.sumarReposiciónLibrosExtraviados()
+        texto = "Se han encontrado un total de " + str(datos[0]) + " libros extraviados. El total de reposición es de " + str(datos[1])
+        elements.append(Paragraph(texto, styles['Normal']))
+        doc.build(elements)
     def reporte3(self):
         #messagebox.showinfo(title="Reporte", message=)
         pass
