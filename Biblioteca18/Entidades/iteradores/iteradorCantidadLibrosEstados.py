@@ -1,4 +1,4 @@
-class iteradorCantidadLibrosEstados:
+class IteradorCantidadLibrosEstados:
     def __init__(self, listaLibros:list, dniSocio: int):
         self.listaLibros=listaLibros
 
