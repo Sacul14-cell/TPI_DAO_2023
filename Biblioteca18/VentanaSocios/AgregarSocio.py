@@ -1,7 +1,6 @@
-from tkinter import ttk
 from tkinter import *
-from Clase.socio import Socio
-from Clase.administrarSocio import *
+from Entidades.socio import Socio
+from CRUD.administrarSocio import *
 class AgregarSocio:
     def __init__(self, datos=[]):
         self.window = Tk()
@@ -12,9 +11,9 @@ class AgregarSocio:
         frame2 = Frame(self.window)
         frame2.pack(pady=5, padx=5)
 
-        self.dni = StringVar()
-        self.nombre = StringVar()
-        self.apellido = StringVar()
+        self.dni = IntVar(self.window)
+        self.nombre = StringVar(self.window)
+        self.apellido = StringVar(self.window)
 
         Label(frame1, text="Dni:").grid(row=0, column=0)
         Entry(frame1, textvariable=self.dni).grid(row=0, column=1)
@@ -40,15 +39,18 @@ class AgregarSocio:
         dni = self.dni.get()
         nombre = self.nombre.get()
         apellido = self.apellido.get()
+        print("Datos: ",dni, nombre, apellido)
         socio = Socio(dni, nombre, apellido)
         try:
             cargar_socio(socio)
         except Exception as e:
             print(f"Error al agregar el socio: {e}")
+        else:
+            print("Socio cargado")
         
-        dni = self.dni.set("")
-        nombre = self.nombre.set("")
-        apellido = self.apellido.set("")
+        self.dni.set(0)
+        self.nombre.set("")
+        self.apellido.set("")
 
 
     # Función para editar un Socio seleccionado
@@ -65,6 +67,6 @@ class AgregarSocio:
             modificar_socio(socio, nuevo)
         except Exception as e:
             print(f"Error al modificar el socio: {e}")
-        dni = self.dni.set("")
-        nombre = self.nombre.set("")
-        apellido = self.apellido.set("")
+        self.dni.set(0)
+        self.nombre.set("")
+        self.apellido.set("")

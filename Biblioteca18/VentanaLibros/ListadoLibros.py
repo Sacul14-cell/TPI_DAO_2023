@@ -1,6 +1,11 @@
 import tkinter as tk
 from tkinter import ttk
 from VentanaLibros.AgregarLibros import AgregarLibro
+from Estados.prestado import Prestado
+from Estados.disponible import Disponible
+from Estados.extraviado import Extraviado
+from Entidades.libro import Libro
+from CRUD.administrarLibro import *
 class ListadoLibros:
 
     def agregar_libro(self):
@@ -11,17 +16,15 @@ class ListadoLibros:
     def eliminar_libro(self):
         selected_item = self.lista_libros.selection()[0]
         self.lista_libros.delete(selected_item)
-
-    # Función para cargar los datos de un libro seleccionado en los campos de entrada
-    def cargar_datos(self):
-        selected_item = self.lista_libros.selection()[0]
-        libro = self.lista_libros.item(selected_item, "values")
-        codigo = 323
-        titulo = "sdhsdhs"
-        precio = 435
-        estado = "1"
-        self.lista_libros.insert("", "end", values=(codigo, titulo, precio, estado))
-
+        codigo = selected_item[0]
+        titulo = selected_item[1]
+        precio = selected_item[2]
+        estado = selected_item[3]
+        print(estado)
+        e = [Disponible, Prestado, Extraviado]
+        estados = {"Disponible": 1, "Prestado": 2, "Extraviado": 3}
+        libro = Libro(codigo, titulo, precio, e[estados[estado]-1]())
+        eliminar_libro_db(libro)
     def __init__(self, padron):
         # Crear la self.ventana principal
         self.ventana = tk.Tk()
@@ -44,10 +47,10 @@ class ListadoLibros:
         self.lista_libros.heading("#4", text="Estado")
         self.lista_libros.grid(row=4, column=0, columnspan=3)
 
-        for libro in self.padron:
+        for libro in self.padron.values():
             self.lista_libros.insert("", "end", values=(libro.codigo, libro.titulo, libro.precio_reposicion, libro.estado))
         # Configurar evento para cargar datos al hacer clic en un elemento de la lista
-        self.lista_libros.bind("<<TreeviewSelect>>", lambda event: self.cargar_datos())
+        # self.lista_libros.bind("<<TreeviewSelect>>", lambda event: self.cargar_datos())
 
     def mostrar(self):
         self.ventana.mainloop()

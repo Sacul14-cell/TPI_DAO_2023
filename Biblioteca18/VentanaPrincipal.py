@@ -32,4 +32,4 @@ class VentanaPrincipal:
     def ListarSocios(self):
         ListadoSocios(self.padron.socios).mostrar()
     def ListarPrestamos(self):
-        ListadoPrestamos(self.padron.prestamos).mostrar()
+        ListadoPrestamos(self.padron).mostrar()

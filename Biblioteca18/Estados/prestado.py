@@ -16,3 +16,7 @@ class Prestado(Estado):
 
     def getDescripcion(self):
         return "El libro está prestado a un usuario."
+    def __str__(self):
+        return self.getNombre()
+    def getCodigo(self):
+        return 2

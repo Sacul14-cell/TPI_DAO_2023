@@ -2,10 +2,10 @@
 from tkinter import *
 from tkinter import messagebox
 class VentanaReportes:
-    def __init__(self):
+    def __init__(self, padron):
         self.window = Tk()
         self.window.title("Reportes")
-        
+        self.padro = padron
         frame1 = Frame(self.window)
         frame1.pack(pady=20, padx=10)
 

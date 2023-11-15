@@ -5,6 +5,7 @@ from Entidades.libro import Libro
 from Estados.disponible import Disponible
 from Estados.extraviado import Extraviado
 from Estados.prestado import Prestado
+from CRUD.administrarLibro import *
 from db import DBConnection
 class AgregarLibro:
     def __init__(self, datos=[]):
@@ -17,9 +18,9 @@ class AgregarLibro:
         frame2 = Frame(self.window)
         frame2.pack(pady=5, padx=5)
 
-        self.codigo = StringVar()
-        self.titulo = StringVar()
-        self.precio = StringVar()
+        self.codigo = IntVar(self.window)
+        self.titulo = StringVar(self.window)
+        self.precio = DoubleVar(self.window)
 
         Label(frame1, text="Codigo:").grid(row=0, column=0)
         Entry(frame1, textvariable=self.codigo).grid(row=0, column=1)
@@ -49,17 +50,15 @@ class AgregarLibro:
         titulo = self.titulo.get()
         precio = self.precio.get()
         estado = self.estado.get()
-        print(estado)
         e = [Disponible, Prestado, Extraviado]
         estados = {"Disponible": 1, "Prestado": 2, "Extraviado": 3}
-        query = "INSERT INTO libro (codigo, titulo, precio, estado_idestado) VALUES (?, ?, ?, ?)"
-        values = (int(codigo), titulo, float(precio), int(estados[estado]))
-
+        libro = Libro(codigo, titulo, precio, e[estados[estado]-1]())
         try:
-            self.db.execute(query, values, 1)
-            print("Libro agregado correctamente.")
+            cargar_libro(libro)
         except Exception as e:
             print(f"Error al agregar el libro: {e}")
+        else:
+            print("Libro agregado correctamente.")
         #l = Libro(int(codigo), titulo, float(precio), e[estados[estado]-1]())
         # self.lista_libros.insert("", "end", values=(codigo, titulo, precio, estado))
         # self.codigo.set(0)

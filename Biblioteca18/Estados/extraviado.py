@@ -16,3 +16,7 @@ class Extraviado(Estado):
 
     def getDescripcion(self):
         return "El libro está extraviado."
+    def __str__(self):
+        return self.getNombre()
+    def getCodigo(self):
+        return 3

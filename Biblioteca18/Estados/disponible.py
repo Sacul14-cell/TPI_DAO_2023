@@ -18,3 +18,6 @@ class Disponible(Estado):
         return "El libro está disponible para ser prestado."
     def __str__(self):
         return self.getNombre()
+    
+    def getCodigo(self):
+        return 1

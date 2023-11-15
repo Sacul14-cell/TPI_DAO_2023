@@ -34,4 +34,4 @@ class Prestamo:
             return max(demora, 0)
 
 def obtenerFechaActual():
-    return datetime.now()
+        return datetime.now()

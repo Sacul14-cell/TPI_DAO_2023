@@ -1,7 +1,7 @@
 import tkinter as tk
 from tkinter import ttk
 from VentanaSocios.AgregarSocio import AgregarSocio
-from Clase.administrarSocio import *
+from CRUD.administrarSocio import *
 class ListadoSocios:
 
     def agregar_Socio(self):
@@ -18,20 +18,11 @@ class ListadoSocios:
         socio = Socio(dni, nombre, apellido)
         eliminar_socio_db(socio)
 
-    # Función para cargar los datos de un Socio seleccionado en los campos de entrada
-    def cargar_datos(self):
-        selected_item = self.lista_Socios.selection()[0]
-        socio = self.lista_Socios.item(selected_item, "values")
-        dni = 323
-        nombre = "sdhsdhs"
-        apellido = "sfs"
-        self.lista_Socios.insert("", "end", values=(dni, nombre, apellido))
-
-    def __init__(self):
+    def __init__(self, padron):
         # Crear la self.ventana principal
         self.ventana = tk.Tk()
         self.ventana.title("Gestión de Socios")
-
+        self.padron = padron
         
         # Crear botones para CRUD
         agregar_button = tk.Button(self.ventana, text="Agregar", command=self.agregar_Socio)
@@ -48,10 +39,8 @@ class ListadoSocios:
         self.lista_Socios.heading("#3", text="Apellido")
         self.lista_Socios.grid(row=4, column=0, columnspan=3)
 
-        dni = 323
-        nombre = "sdhsdhs"
-        apellido = "sfs"
-        self.lista_Socios.insert("", "end", values=(dni, nombre, apellido))
+        for socio in self.padron.values():
+            self.lista_Socios.insert("", "end", values=(socio.dni, socio.nombre, socio.apellido))
         
 
     def mostrar(self):

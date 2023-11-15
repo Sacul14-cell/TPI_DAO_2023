@@ -1,9 +1,10 @@
+from datetime import *
 class Socio():
-    def __init__(self, dni, nombre, apellido):
+    def __init__(self, dni:int, nombre:str, apellido:str):
         self._dni = dni
         self._nombre = nombre
         self._apellido = apellido
-        
+        self._fechaHoraAlta = f'{datetime.today().strftime("%Y-%m-%d %H:%M:%S")}'
     @property
     def dni(self):
         return self._dni
@@ -19,6 +20,10 @@ class Socio():
     @property
     def set_dni(self, dni):
         self._dni = dni
+
+    @property
+    def fechaAlta(self):
+        return self._fechaHoraAlta
     
     @property
     def set_nombre(self, nombre):
@@ -30,4 +35,4 @@ class Socio():
     
     
     def __str__(self):
-        return f"{self.dni} {self.nombre} {self.apellido}"
+        return f"{self.dni} {self.nombre} {self.apellido} {self.fechaAlta}"
