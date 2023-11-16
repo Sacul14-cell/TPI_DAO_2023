@@ -32,14 +32,14 @@ class VentanaReportes:
         
         
     def reporte1(self):
-        doc = SimpleDocTemplate("ReporteCantidadLibros.pdf", pagesize=letter)
+        doc = SimpleDocTemplate("./TPI_DAO_2023/Biblioteca18/ReporteCantidadLibros.pdf", pagesize=letter)
         elements=[]
         styles = getSampleStyleSheet()
         titulo="Estado de libros en la biblioteca"
         elements.append(Paragraph(titulo, styles['Title']))
         espacio = ""
         elements.append(Paragraph(espacio, styles['Normal']))
-        iterador=IteradorCantidadLibrosEstados(self.padro.getLibros())
+        iterador=IteradorCantidadLibrosEstados(self.padro.libros)
         contEstados= iterador.contarLibros()
         data=[["Disponibles", "Prestados", "Extraviados"],[contEstados[0],contEstados[1],contEstados[2]]]
         table = Table(data, colWidths=[1 * inch, 1 * inch, 1 * inch])
@@ -53,14 +53,14 @@ class VentanaReportes:
         elements.append(table)
         doc.build(elements)
     def reporte2(self):
-        doc = SimpleDocTemplate("ReporteSumatoriaLibrosExtraviados.pdf", pagesize=letter)
+        doc = SimpleDocTemplate("./TPI_DAO_2023/Biblioteca18/ReporteSumatoriaLibrosExtraviados.pdf", pagesize=letter)
         elements=[]
         styles = getSampleStyleSheet()
         titulo="Libros extraviados: monto para reposición"
         elements.append(Paragraph(titulo, styles['Title']))
         espacio = ""
         elements.append(Paragraph(espacio, styles['Normal']))
-        iterador=IteradorSumatoriaLibrosExtraviados(self.padro.getLibros())
+        iterador=IteradorSumatoriaLibrosExtraviados(self.padro.libros)
         datos=iterador.sumarReposiciónLibrosExtraviados()
         texto = "Se han encontrado un total de " + str(datos[0]) + " libros extraviados. El total de reposición es de " + str(datos[1])
         elements.append(Paragraph(texto, styles['Normal']))
@@ -72,14 +72,14 @@ class VentanaReportes:
         #messagebox.showinfo(title="Reporte", message=)
         pass
     def reporte5(self):
-        doc = SimpleDocTemplate("ListaPrestamosDemorados.pdf", pagesize=letter)
+        doc = SimpleDocTemplate("./TPI_DAO_2023/Biblioteca18/ListaPrestamosDemorados.pdf", pagesize=letter)
         elements=[]
         styles = getSampleStyleSheet()
         titulo="Lista de prestamos demorados"
         elements.append(Paragraph(titulo, styles['Title']))
         espacio = ""
         elements.append(Paragraph(espacio, styles['Normal']))
-        iterador=IteradorPrestamosDemorados(self.padro.getLibros())
+        iterador=IteradorPrestamosDemorados(self.padro.prestamos)
         lista=iterador.listaPrestamosDemorados()
         datos=[["Titulo del libro", "Dias de demora"]]
         for d in lista:

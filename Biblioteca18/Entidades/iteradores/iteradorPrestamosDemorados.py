@@ -1,9 +1,10 @@
 class IteradorPrestamosDemorados:
-    def __int__(self, listaPrestamos:list):
+    def __int__(self, listaPrestamos):
         self.listaPrestamos = listaPrestamos
 
     def listaPrestamosDemorados(self):
-        for prestamo in self.listaPrestamos:
+        for prestamo in self.listaPrestamos.values():
+            listaDemoras = []
             demora= prestamo.calcularDemora()
             if demora > 0:
                 #linea = "El libro " + str(prestamo.libro.get_titulo()) + "tiene una demora de " + str(demora) + "dias"

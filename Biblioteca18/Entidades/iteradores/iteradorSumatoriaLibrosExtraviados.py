@@ -5,7 +5,7 @@ class IteradorSumatoriaLibrosExtraviados:
     def sumarReposiciónLibrosExtraviados(self):
         suma=0
         contador=0
-        for libro in self.listaLibros:
+        for libro in self.listaLibros.values():
             if libro.estaExtraviado():
                 suma += float(libro.get_precio_reposicion())
                 contador +=1
