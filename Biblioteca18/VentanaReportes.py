@@ -7,9 +7,9 @@ from reportlab.platypus import SimpleDocTemplate, Paragraph, Spacer
 from reportlab.platypus.tables import Table, TableStyle
 from reportlab.lib.styles import getSampleStyleSheet
 from reportlab.lib.units import inch
-from Biblioteca18.Entidades.iteradores.iteradorCantidadLibrosEstado import IteradorCantidadLibrosEstados
-from Biblioteca18.Entidades.iteradores.iteradorSumatoriaLibrosExtraviados import IteradorSumatoriaLibrosExtraviados
-from Biblioteca18.Entidades.iteradores.iteradorPrestamosDemorados import IteradorPrestamosDemorados
+from Entidades.iteradores.iteradorCantidadLibrosEstados import IteradorCantidadLibrosEstados
+from Entidades.iteradores.iteradorSumatoriaLibrosExtraviados import IteradorSumatoriaLibrosExtraviados
+from Entidades.iteradores.iteradorPrestamosDemorados import IteradorPrestamosDemorados
 class VentanaReportes:
     def __init__(self, padron):
         self.window = Tk()
@@ -33,7 +33,7 @@ class VentanaReportes:
         
     def reporte1(self):
         doc = SimpleDocTemplate("ReporteCantidadLibros.pdf", pagesize=letter)
-        elementos=[]
+        elements=[]
         styles = getSampleStyleSheet()
         titulo="Estado de libros en la biblioteca"
         elements.append(Paragraph(titulo, styles['Title']))
@@ -41,7 +41,7 @@ class VentanaReportes:
         elements.append(Paragraph(espacio, styles['Normal']))
         iterador=IteradorCantidadLibrosEstados(self.padro.getLibros())
         contEstados= iterador.contarLibros()
-        datos=[["Disponibles", "Prestados", "Extraviados"],[contEstados[0],contEstados[1],contEstados[2]]]
+        data=[["Disponibles", "Prestados", "Extraviados"],[contEstados[0],contEstados[1],contEstados[2]]]
         table = Table(data, colWidths=[1 * inch, 1 * inch, 1 * inch])
         table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
                                 ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
@@ -50,11 +50,11 @@ class VentanaReportes:
                                 ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
                                 ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
                                 ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
-        elementos.append(table)
+        elements.append(table)
         doc.build(elements)
     def reporte2(self):
         doc = SimpleDocTemplate("ReporteSumatoriaLibrosExtraviados.pdf", pagesize=letter)
-        elementos=[]
+        elements=[]
         styles = getSampleStyleSheet()
         titulo="Libros extraviados: monto para reposición"
         elements.append(Paragraph(titulo, styles['Title']))
@@ -73,7 +73,7 @@ class VentanaReportes:
         pass
     def reporte5(self):
         doc = SimpleDocTemplate("ListaPrestamosDemorados.pdf", pagesize=letter)
-        elementos=[]
+        elements=[]
         styles = getSampleStyleSheet()
         titulo="Lista de prestamos demorados"
         elements.append(Paragraph(titulo, styles['Title']))
@@ -84,7 +84,7 @@ class VentanaReportes:
         datos=[["Titulo del libro", "Dias de demora"]]
         for d in lista:
             datos.append(d)
-        table = Table(data, colWidths=[1 * inch, 1 * inch, 1 * inch])
+        table = Table(datos, colWidths=[1 * inch, 1 * inch, 1 * inch])
         table.setStyle(TableStyle([('BACKGROUND', (0, 0), (-1, 0), colors.grey),
                                 ('TEXTCOLOR', (0, 0), (-1, 0), colors.whitesmoke),
                                 ('ALIGN', (0, 0), (-1, -1), 'CENTER'),
@@ -92,8 +92,8 @@ class VentanaReportes:
                                 ('BOTTOMPADDING', (0, 0), (-1, 0), 12),
                                 ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
                                 ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
-        elementos.append(table)
-        doc.build(elementos)
+        elements.append(table)
+        doc.build(elements)
     
     def mostrar(self):
         self.window.mainloop()
