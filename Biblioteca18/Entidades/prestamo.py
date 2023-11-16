@@ -32,6 +32,8 @@ class Prestamo:
         else:
             demora = (self.plazo - self.fecha_prestamo).days
             return max(demora, 0)
-
+    def __str__(self):
+        return f"Fecha Prestamo: {self.fecha_prestamo}, Fecha Devolucion: {self.fecha_devolucion}, Libro: {self.libro}, Plazo: {self.plazo}"
 def obtenerFechaActual():
         return datetime.now()
+

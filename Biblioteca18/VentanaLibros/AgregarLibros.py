@@ -68,11 +68,27 @@ class AgregarLibro:
 
     # Función para editar un libro seleccionado
     def editar_libro(self):
-        # selected_item = self.lista_libros.selection()[0]
-        codigo = self.datos[0]
-        titulo = self.datos[1]
-        precio = self.datos[2]
-        estado = self.datos[3]
+        selected_item = self.datos.selection()
+        for item in selected_item:
+            value = self.datos.item(item, 'values')
+        codigo = value[0]
+        titulo = value[1]
+        precio = value[2]
+        estado = value[3]
+        e = [Disponible, Prestado, Extraviado]
+        estados = {"Disponible": 1, "Prestado": 2, "Extraviado": 3}
+        libro = Libro(codigo, titulo, precio, e[estados[estado]-1]())
+        
+        codigo = self.codigo.get()
+        titulo = self.titulo.get()
+        precio = self.precio.get()
+        estado = self.estado.get()
+        nuevo = Libro(codigo, titulo, precio, e[estados[estado]-1]())
+        
+        try:
+            modificar_libro(libro, nuevo)
+        except Exception as e:
+            print(f"Error al editar el libro: {e}")
         # self.lista_libros.item(selected_item, values=(codigo, titulo, precio, estado))
         codigo = self.codigo.set("")
         titulo = self.titulo.set("")

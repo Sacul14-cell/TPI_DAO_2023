@@ -67,11 +67,27 @@ class AgregarPrestamo:
 
     # Función para editar un Prestamo seleccionado
     def editar_Prestamo(self):
-        # selected_item = self.lista_Prestamos.selection()[0]
-        dni = self.datos[0]
-        codigo = self.datos[1]
-        fechaPrestamo = self.datos[2]
-        diasPactados = self.datos[3]
+        selected_item = self.datos.selection()
+        for item in selected_item:
+            value = self.datos.item(item, 'values')
+        dni = value[0]
+        codigo = value[1]
+        fecha_prestamo = value[2]
+        dias_pactados = value[3]
+        prestamo = Prestamo(fecha_prestamo, self.padron.libros[codigo], self.padron.socios[dni], dias_pactados)
+        
+        dni = self.dni.get()
+        codigo = self.codigo.get()
+        fecha_prestamo = self.fechaPrestamo.get()
+        dias_pactados = self.diasPactados.get()
+        nuevo = Prestamo(fecha_prestamo, self.padron.libros[codigo], self.padron.socios[dni], dias_pactados)
+        
+        try:
+            modificar_prestamo(prestamo, nuevo)
+        except Exception as e:
+            print(f"Error al agregar el prestamo: {e}")
+            
+            
         # self.lista_Prestamos.insert("", "end", values=(dni, codigo, fechaPrestamo, diasPactados, fechaDevolucion))
         self.dni.set("")
         self.codigo.set("")

@@ -55,13 +55,19 @@ class AgregarSocio:
 
     # Función para editar un Socio seleccionado
     def editar_Socio(self):
-        # selected_item = self.lista_Socios.selection()[0]
-        dni = self.datos[0]
-        nombre = self.datos[1]
-        apellido = self.datos[2]
+        for item in self.datos.selection():
+            value = self.datos.item(item, 'values')
+        dni = value[0]
+        nombre = value[1]
+        apellido = value[2]
         socio = Socio(dni, nombre, apellido)
         
-        # Para crear nuevo tendría que tomar los datos nuevos que se ingresan por teclado
+        
+        
+        
+        dni = self.dni.get()
+        nombre = self.nombre.get()
+        apellido = self.apellido.get()
         nuevo = Socio(dni, nombre, apellido)
         try:
             modificar_socio(socio, nuevo)

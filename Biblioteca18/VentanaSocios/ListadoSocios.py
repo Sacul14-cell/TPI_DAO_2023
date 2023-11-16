@@ -8,13 +8,17 @@ class ListadoSocios:
         AgregarSocio().mostrar()
     def editar_Socio(self):
         AgregarSocio(self.lista_Socios).mostrar()
+        
+        
     # Función para eliminar un Socio seleccionado
     def eliminar_Socio(self):
-        selected_item = self.lista_Socios.selection()[0]
+        selected_item = self.lista_Socios.selection()
         self.lista_Socios.delete(selected_item)
-        dni = selected_item[0]
-        nombre = selected_item[1]
-        apellido = selected_item[2]
+        for item in selected_item:
+            value = self.lista_Socios.item(item, 'values')
+        dni = value[0]
+        nombre = value[1]
+        apellido = value[2]
         socio = Socio(dni, nombre, apellido)
         eliminar_socio_db(socio)
 

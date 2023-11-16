@@ -14,7 +14,7 @@ class Biblioteca:
         estado = [Disponible, Prestado, Extraviado]
         self.libros = dict()
         self.socios = dict()
-        self.prestamos = set()
+        self.prestamos = []
         # Conexion a la base de datos
         # self.db = DBConnection('./TPI_DAO_2023/Biblioteca18/biblioteca.db')
 
@@ -42,7 +42,7 @@ class Biblioteca:
         self.socios[socio.dni] = socio
     
     def agregarPrestamo(self, prestamo):
-        self.prestamos.add(prestamo)
+        self.prestamos.append(prestamo)
 
     def getLibros(self):
         return self.libros

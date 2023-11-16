@@ -14,12 +14,14 @@ class ListadoLibros:
         AgregarLibro(self.lista_libros).mostrar()
     # Función para eliminar un libro seleccionado
     def eliminar_libro(self):
-        selected_item = self.lista_libros.selection()[0]
+        selected_item = self.lista_libros.selection()
+        for item in selected_item:
+            value = self.lista_libros.item(item, 'values')
         self.lista_libros.delete(selected_item)
-        codigo = selected_item[0]
-        titulo = selected_item[1]
-        precio = selected_item[2]
-        estado = selected_item[3]
+        codigo = value[0]
+        titulo = value[1]
+        precio = value[2]
+        estado = value[3]
         print(estado)
         e = [Disponible, Prestado, Extraviado]
         estados = {"Disponible": 1, "Prestado": 2, "Extraviado": 3}

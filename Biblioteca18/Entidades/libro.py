@@ -33,7 +33,7 @@ class Libro:
         self.estado = estado
 
     def __str__(self):
-        return f"Libro [Codigo: {self.codigo}, Título: {self.titulo}]"
+        return f"[Codigo: {self.codigo}, Título: {self.titulo}]"
     
     def estaPrestado(self):
         return self.estado.esPrestado()

@@ -1,11 +1,11 @@
 class iteradorSolicitantesLibroParticular:
-    def __int__(self, listaPrestamos: list, listaSocios:list):
+    def __init__(self, listaPrestamos):
         self.listaPrestamos=listaPrestamos
 
-    def listaSolicitantesLibro(self, codLib: int):
+    def listaSolicitantesLibro(self, codLib):
         solicitantes=[]
         for prestamo in self.listaPrestamos:
-            if prestamo.libro.get_codigo() == codLib:
+            if prestamo.libro.codigo == codLib:
                 socio=prestamo.socio
                 nombreSocio=str(socio.nombre) + " " + str(socio.apellido)
                 solicitantes.append(nombreSocio)

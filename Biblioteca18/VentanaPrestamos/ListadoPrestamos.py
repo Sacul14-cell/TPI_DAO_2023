@@ -11,12 +11,14 @@ class ListadoPrestamos:
         AgregarPrestamo(self.padron, self.lista_Prestamos).mostrar()
     # Función para eliminar un Prestamo seleccionado
     def eliminar_Prestamo(self):
-        selected_item = self.lista_Prestamos.selection()[0]
+        selected_item = self.lista_Prestamos.selection()
+        for item in selected_item:
+            value = self.lista_Prestamos.item(item, 'values')
         self.lista_Prestamos.delete(selected_item)
-        dni = selected_item[0]
-        codigo = selected_item[1]
-        fecha_prestamo = selected_item[2]
-        dias_pactados = selected_item[3]
+        dni = value[0]
+        codigo = value[1]
+        fecha_prestamo = value[2]
+        dias_pactados = value[3]
         prestamo = Prestamo(fecha_prestamo, self.padron.libros[codigo], self.padron.socios[dni], dias_pactados)
         eliminar_prestamo_db(prestamo)
 
