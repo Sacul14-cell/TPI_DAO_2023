@@ -26,6 +26,12 @@ class AgregarSocio:
         if self.datos == []:
             Button(frame2, text="Agregar", command=self.agregar_Socio).pack(side="left", padx=10)
         else:
+            for item in self.datos.selection():
+                value = self.datos.item(item, 'values')
+            self.dni.set(value[0])
+            self.nombre.set(value[1])
+            self.apellido.set(value[2])
+            self.socio = Socio(self.dni.get(), self.nombre.get(), self.apellido.get())
             Button(frame2, text="Editar", command=self.editar_Socio).pack(side="left", padx=10)
         
         Button(frame2, text="Cancelar", command=self.window.destroy).pack(side="right", padx=10)
@@ -55,22 +61,13 @@ class AgregarSocio:
 
     # Función para editar un Socio seleccionado
     def editar_Socio(self):
-        for item in self.datos.selection():
-            value = self.datos.item(item, 'values')
-        dni = value[0]
-        nombre = value[1]
-        apellido = value[2]
-        socio = Socio(dni, nombre, apellido)
-        
-        
-        
-        
+
         dni = self.dni.get()
         nombre = self.nombre.get()
         apellido = self.apellido.get()
         nuevo = Socio(dni, nombre, apellido)
         try:
-            modificar_socio(socio, nuevo)
+            modificar_socio(self.socio, nuevo)
         except Exception as e:
             print(f"Error al modificar el socio: {e}")
         self.dni.set(0)

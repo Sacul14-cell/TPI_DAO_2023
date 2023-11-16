@@ -36,6 +36,14 @@ class AgregarPrestamo:
             Label(frame1, text="Fecha de Devolución:").grid(row=4, column=0)
             Entry(frame1, textvariable=self.fechaDevolucion).grid(row=4, column=1)
 
+            for item in self.datos.selection():
+                value = self.datos.item(item, 'values')
+            self.dni.set(value[0])
+            self.codigo.set(value[1])
+            self.fechaPrestamo.set(value[2])
+            self.diasPactados.set(value[3])
+            self.prestamo = Prestamo(self.fechaPrestamo.get(), self.padron.socios[self.dni.get()], self.padron.libros[self.codigo.get()], self.diasPactados.get())
+
             Button(frame2, text="Editar", command=self.editar_Prestamo).pack(side="left", padx=10)
         
         Button(frame2, text="Cancelar", command=self.window.destroy).pack(side="right", padx=10)
@@ -67,23 +75,15 @@ class AgregarPrestamo:
 
     # Función para editar un Prestamo seleccionado
     def editar_Prestamo(self):
-        selected_item = self.datos.selection()
-        for item in selected_item:
-            value = self.datos.item(item, 'values')
-        dni = value[0]
-        codigo = value[1]
-        fecha_prestamo = value[2]
-        dias_pactados = value[3]
-        prestamo = Prestamo(fecha_prestamo, self.padron.libros[codigo], self.padron.socios[dni], dias_pactados)
-        
+
         dni = self.dni.get()
         codigo = self.codigo.get()
         fecha_prestamo = self.fechaPrestamo.get()
         dias_pactados = self.diasPactados.get()
+        fecha_devolucion = self.fechaDevolucion.get()
         nuevo = Prestamo(fecha_prestamo, self.padron.libros[codigo], self.padron.socios[dni], dias_pactados)
-        
         try:
-            modificar_prestamo(prestamo, nuevo)
+            modificar_prestamo(self.prestamo, nuevo)
         except Exception as e:
             print(f"Error al agregar el prestamo: {e}")
             

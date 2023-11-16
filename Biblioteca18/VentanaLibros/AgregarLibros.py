@@ -36,6 +36,15 @@ class AgregarLibro:
         if self.datos == []:
             Button(frame2, text="Agregar", command=self.agregar_libro).pack(side="left", padx=10)
         else:
+            for item in self.datos.selection():
+                value = self.datos.item(item, 'values')
+            self.codigo.set(value[0])
+            self.titulo.set(value[1])
+            self.precio.set(value[2])
+            self.estado.set(value[3])
+            e = [Disponible, Prestado, Extraviado]
+            estados = {"Disponible": 1, "Prestado": 2, "Extraviado": 3}
+            self.libro = Libro(self.codigo.get(), self.titulo.get(), self.precio.get(), e[estados[self.estado.get()]-1]())
             Button(frame2, text="Editar", command=self.editar_libro).pack(side="left", padx=10)
         
         Button(frame2, text="Cancelar", command=self.window.destroy).pack(side="right", padx=10)
@@ -68,17 +77,10 @@ class AgregarLibro:
 
     # Función para editar un libro seleccionado
     def editar_libro(self):
-        selected_item = self.datos.selection()
-        for item in selected_item:
-            value = self.datos.item(item, 'values')
-        codigo = value[0]
-        titulo = value[1]
-        precio = value[2]
-        estado = value[3]
+
         e = [Disponible, Prestado, Extraviado]
         estados = {"Disponible": 1, "Prestado": 2, "Extraviado": 3}
-        libro = Libro(codigo, titulo, precio, e[estados[estado]-1]())
-        
+
         codigo = self.codigo.get()
         titulo = self.titulo.get()
         precio = self.precio.get()
@@ -86,7 +88,7 @@ class AgregarLibro:
         nuevo = Libro(codigo, titulo, precio, e[estados[estado]-1]())
         
         try:
-            modificar_libro(libro, nuevo)
+            modificar_libro(self.libro, nuevo)
         except Exception as e:
             print(f"Error al editar el libro: {e}")
         # self.lista_libros.item(selected_item, values=(codigo, titulo, precio, estado))
