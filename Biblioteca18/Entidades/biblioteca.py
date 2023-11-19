@@ -31,7 +31,7 @@ class Biblioteca:
         # Agregar Prestamos
         res = consultar_prestamo()
         for i in res:
-            p = Prestamo(str(i[0]), self.libros[int(i[3])], self.socios[int(i[2])], str(i[1]))
+            p = Prestamo(str(i[0]), self.libros[int(i[3])], self.socios[int(i[2])], str(i[1]), i[4])
             self.agregarPrestamo(p)
 
     

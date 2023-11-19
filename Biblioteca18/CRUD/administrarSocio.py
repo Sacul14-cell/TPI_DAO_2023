@@ -2,7 +2,7 @@ from Entidades.socio import *
 from db import *
 
 def cargar_socio(socio):
-    db1 = DBConnection('./TPI_DAO_2023/Biblioteca18/biblioteca.db')
+    db1 = DBConnection('biblioteca.db')
     cursor = db1.conn.cursor()
     datos = (f"{socio.dni}", f"{socio.nombre}", f"{socio.apellido}", f"{socio.fechaAlta}")
     insert = "INSERT INTO socio (dni, nombre, apellido, fechaHoraAlta) VALUES (?, ?, ?, ?)"
@@ -11,7 +11,7 @@ def cargar_socio(socio):
  
     
 def eliminar_socio_db(socio):
-    db1 = DBConnection('./TPI_DAO_2023/Biblioteca18/biblioteca.db')
+    db1 = DBConnection('biblioteca.db')
     cursor = db1.conn.cursor()
     delete = f"DELETE FROM socio WHERE dni = {socio.dni}"
     cursor.execute(delete)
@@ -19,7 +19,7 @@ def eliminar_socio_db(socio):
   
 
 def modificar_socio(socio, nuevo):
-    db1 = DBConnection('./TPI_DAO_2023/Biblioteca18/biblioteca.db')
+    db1 = DBConnection('biblioteca.db')
     cursor = db1.conn.cursor()
     datos = (f"{nuevo.dni}", f"{nuevo.nombre}", f"{nuevo.apellido}")
     update = f"UPDATE socio SET dni = ?, nombre = ?, apellido = ? WHERE dni = {socio.dni}"
@@ -28,7 +28,7 @@ def modificar_socio(socio, nuevo):
 
 
 def consultar_socio():
-    db1 = DBConnection('./TPI_DAO_2023/Biblioteca18/biblioteca.db')
+    db1 = DBConnection('biblioteca.db')
     cursor = db1.conn.cursor()
     cursor.execute("SELECT * FROM socio")
     result = cursor.fetchall()

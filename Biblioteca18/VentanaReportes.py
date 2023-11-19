@@ -43,7 +43,7 @@ class VentanaReportes:
         
         
     def reporte1(self):
-        doc = SimpleDocTemplate("./TPI_DAO_2023/Biblioteca18/ReporteCantidadLibros.pdf", pagesize=letter)
+        doc = SimpleDocTemplate("ReporteCantidadLibros.pdf", pagesize=letter)
         elements=[]
         styles = getSampleStyleSheet()
         titulo="Estado de libros en la biblioteca"
@@ -64,7 +64,7 @@ class VentanaReportes:
         elements.append(table)
         doc.build(elements)
     def reporte2(self):
-        doc = SimpleDocTemplate("./TPI_DAO_2023/Biblioteca18/ReporteSumatoriaLibrosExtraviados.pdf", pagesize=letter)
+        doc = SimpleDocTemplate("ReporteSumatoriaLibrosExtraviados.pdf", pagesize=letter)
         elements=[]
         styles = getSampleStyleSheet()
         titulo="Libros extraviados: monto para reposición"
@@ -77,13 +77,13 @@ class VentanaReportes:
         elements.append(Paragraph(texto, styles['Normal']))
         doc.build(elements)
     def reporte3(self):
-        doc = SimpleDocTemplate("./TPI_DAO_2023/Biblioteca18/ReporteCantidadLibros.pdf", pagesize=letter)
+        #doc = SimpleDocTemplate("ReporteCantidadLibros.pdf", pagesize=letter)
         elements=[]
         styles = getSampleStyleSheet()
-        titulo="Estado de libros en la biblioteca"
-        elements.append(Paragraph(titulo, styles['Title']))
+        #titulo="Estado de libros en la biblioteca"
+        #elements.append(Paragraph(titulo, styles['Title']))
         espacio = ""
-        elements.append(Paragraph(espacio, styles['Normal']))
+        #elements.append(Paragraph(espacio, styles['Normal']))
         iterador=iteradorSolicitantesLibroParticular(self.padro.prestamos)
         lista= iterador.listaSolicitantesLibro(self.libro.get())
         messagebox.showinfo(title="Reporte", message=lista)
@@ -97,15 +97,15 @@ class VentanaReportes:
         #                         ('BACKGROUND', (0, 1), (-1, -1), colors.beige),
         #                         ('GRID', (0, 0), (-1, -1), 1, colors.black)]))
         # elements.append(table)
-        doc.build(elements)
+        #doc.build(elements)
     def reporte4(self):
-        doc = SimpleDocTemplate("./TPI_DAO_2023/Biblioteca18/ReportePrestamosSocioParticular.pdf", pagesize=letter)
-        elements=[]
-        styles = getSampleStyleSheet()
-        titulo="Listado de prestamos por socio"
-        elements.append(Paragraph(titulo, styles['Title']))
-        espacio = ""
-        elements.append(Paragraph(espacio, styles['Normal']))
+        #doc = SimpleDocTemplate("ReportePrestamosSocioParticular.pdf", pagesize=letter)
+        #elements=[]
+        #styles = getSampleStyleSheet()
+        #titulo="Listado de prestamos por socio"
+        #elements.append(Paragraph(titulo, styles['Title']))
+        #espacio = ""
+        #elements.append(Paragraph(espacio, styles['Normal']))
         iterador=iteradorPrestamosSocio(self.padro.prestamos)
         lista= iterador.listaPrestamosSocio(self.socio.get())
         messagebox.showinfo(title="Reporte", message=lista)
@@ -121,7 +121,7 @@ class VentanaReportes:
         # elements.append(table)
         #doc.build(elements)
     def reporte5(self):
-        doc = SimpleDocTemplate("./TPI_DAO_2023/Biblioteca18/ListaPrestamosDemorados.pdf", pagesize=letter)
+        doc = SimpleDocTemplate("ListaPrestamosDemorados.pdf", pagesize=letter)
         elements=[]
         styles = getSampleStyleSheet()
         titulo="Lista de prestamos demorados"

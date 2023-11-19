@@ -1,33 +1,48 @@
 from Entidades.prestamo import *
 from db import *
-
+from datetime import *
 def cargar_prestamo(prestamo):
-    db1 = DBConnection('./TPI_DAO_2023/Biblioteca18/biblioteca.db')
+    db1 = DBConnection('biblioteca.db')
     cursor = db1.conn.cursor()
-    datos = (f"{prestamo.fecha_prestamo}", f"{prestamo.plazo}", f"{prestamo.socio.dni}", f"{prestamo.libro.codigo}")
+    datos = (f"{prestamo.fecha_prestamo.strftime('%d/%m/%Y')}", f"{prestamo.plazo}", f"{prestamo.socio.dni}", f"{prestamo.libro.codigo}")
     insert = "INSERT INTO prestamo (fechaPrestamo, diasPactados, socio_dni, libro_codigo) VALUES (?, ?, ?, ?)"
     cursor.execute(insert, datos)
     db1.conn.commit()
  
 def eliminar_prestamo_db(prestamo):
-    db1 = DBConnection('./TPI_DAO_2023/Biblioteca18/biblioteca.db')
+    db1 = DBConnection('biblioteca.db')
     cursor = db1.conn.cursor()
-    delete = f"DELETE FROM prestamo WHERE fechaPrestamo = {prestamo.fecha_prestamo}"
+    delete = f"DELETE FROM prestamo WHERE fechaPrestamo = {prestamo.fecha_prestamo.strftime('%d/%m/%Y')}"
     cursor.execute(delete)
     db1.conn.commit()
   
 
 def modificar_prestamo(prestamo, nuevo):
-    db1 = DBConnection('./TPI_DAO_2023/Biblioteca18/biblioteca.db')
+    db1 = DBConnection('biblioteca.db')
     cursor = db1.conn.cursor()
-    datos = (f"{nuevo.fecha_prestamo}", f"{nuevo.plazo}", f"{nuevo.socio.dni}", f"{nuevo.libro.codigo}")
-    update = f"UPDATE prestamo SET fechaPrestamo = ?, diasPactados = ?, socio_dni = ?, libro_codigo = ? WHERE fechaPrestamo = {prestamo.fecha_prestamo}"
-    cursor.execute(update, datos)
+    nueva_fecha_devolucion = nuevo.fecha_devolucion.strftime('%d/%m/%Y') if nuevo.fecha_devolucion else None
+    datos = (
+        prestamo.fecha_prestamo.strftime('%d/%m/%Y'),
+        prestamo.plazo,
+        prestamo.socio.dni,
+        prestamo.libro.codigo,
+        nueva_fecha_devolucion
+    )
+    update = """
+        UPDATE prestamo
+        SET fechaPrestamo = ?,
+            diasPactados = ?,
+            socio_dni = ?,
+            libro_codigo = ?,
+            fechaDevolucion = ?
+        WHERE fechaPrestamo = ?
+    """
+    cursor.execute(update, datos + (prestamo.fecha_prestamo.strftime('%d/%m/%Y'),))
     db1.conn.commit()
 
 
 def consultar_prestamo():
-    db1 = DBConnection('./TPI_DAO_2023/Biblioteca18/biblioteca.db')
+    db1 = DBConnection('biblioteca.db')
     cursor = db1.conn.cursor()
     cursor.execute("SELECT * FROM prestamo")
     result = cursor.fetchall()

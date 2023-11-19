@@ -2,12 +2,12 @@ from datetime import datetime, timedelta
 from Estados.estado import Estado
 
 class Prestamo:
-    def __init__(self, fecha_prestamo, libro, socio, fechaDevEstipulada):
-        self.fecha_prestamo = fecha_prestamo
-        self.fecha_devolucion = None
+    def __init__(self, fecha_prestamo, libro, socio, fechaDevEstipulada, fecha_devolucion):
+        self.fecha_prestamo = datetime.strptime(fecha_prestamo, '%d/%m/%Y')
         self.plazo=fechaDevEstipulada
         self.libro = libro
         self.socio = socio
+        self.fecha_devolucion = None if fecha_devolucion is None else datetime.strptime(fecha_devolucion, '%d/%m/%Y')
 
     def devolverLibro(self):
         self.fecha_devolucion = obtenerFechaActual()
@@ -28,10 +28,11 @@ class Prestamo:
     def calcularDemora(self):
         if self.fecha_devolucion:
             demora = (self.fecha_devolucion - self.fecha_prestamo).days
-            return max(demora, 0)
+            return int(demora)
         else:
-            demora = (self.plazo - self.fecha_prestamo).days
-            return max(demora, 0)
+            ahora = obtenerFechaActual()
+            demora = (ahora - self.fecha_prestamo).days
+            return int(demora)
     def __str__(self):
         return f"Fecha Prestamo: {self.fecha_prestamo}, Fecha Devolucion: {self.fecha_devolucion}, Libro: {self.libro}, Plazo: {self.plazo}"
 def obtenerFechaActual():
